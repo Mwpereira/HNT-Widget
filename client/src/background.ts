@@ -13,7 +13,7 @@ protocol.registerSchemesAsPrivileged([
 async function createWindow() {
   // Create the browser window.
   const win = new BrowserWindow({
-    title: 'HNT Widget',
+    title: "HNT Widget",
     height: 335,
     width: 675,
     // maxHeight: 335,

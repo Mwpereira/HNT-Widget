@@ -16,7 +16,7 @@ const routes: Array<RouteConfig> = [
     path: "/settings",
     name: "Settings",
     component: Settings,
-  }
+  },
 ];
 
 const router = new VueRouter({
