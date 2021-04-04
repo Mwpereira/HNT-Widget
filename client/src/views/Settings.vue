@@ -3,51 +3,58 @@
     <div class="card">
       <div class="card-content">
         <div class="content">
-          <div class="level is-mobile">
-            <h1 class="sub-title has-text-white has-text-centered">Settings</h1>
-            <b-button class="is-dark" type="submit" v-on:click="pageSwitch('')">
-              <b-icon icon="times" pack="fas" size="is-medium"> </b-icon>
-            </b-button>
-          </div>
 
-          <div class="columns">
-            <div class="column">
-              <div class="column">
-                <h3 class="has-text-white">Refresh</h3>
-                <b-radio v-model="refresh" name="refresh"> 1m </b-radio>
-                <b-radio v-model="refresh" name="refresh"> 5m </b-radio>
-                <b-radio v-model="refresh" name="refresh"> 15m </b-radio>
+          <h1 class="sub-title has-text-white has-text-centered mb-5">Settings
+            <b-button class="is-dark" type="submit" v-on:click="pageSwitch('')" style="display: inline; z-index: 100; position: absolute; right: 15px; top: 15px;">
+              <b-icon icon="times" pack="fas" size="is-medium"> </b-icon>
+            </b-button></h1>
+          <div class="columns is-multiline">
+            <div class="column is-6 mb-3">
+              <p class="has-text-white has-text-weight-semibold">Refresh Time</p>
+              <b-radio v-model="refreshTime" name="time" native-value="15000"> 15s</b-radio>
+              <b-radio v-model="refreshTime" name="time" native-value="30000"> 30s</b-radio>
+              <b-radio v-model="refreshTime" name="time" native-value="60000"> 1m</b-radio>
+              <b-radio v-model="refreshTime" name="time" native-value="300000"> 5m</b-radio>
+              <b-radio v-model="refreshTime" name="time" native-value="900000"> 15m</b-radio>
+            </div>
+            <div class="column is-6 mb-3">
+              <p class="has-text-white has-text-weight-semibold">Launch on Windows Start up</p>
+              <b-checkbox v-model="autoStartup" :checked="autoStartup" type="is-warning">Enabled</b-checkbox>
+            </div>
+            <div class="column is-6">
+              <p class="has-text-white has-text-weight-semibold">Bobcat Credentials</p>
+              <b-input class="ml-6 mr-6 mb-1" placeholder="username"></b-input>
+              <b-input class="ml-6 mr-6" placeholder="password"></b-input>
+              <div class="level">
+                <b-button class="is-primary is-fullwidth mt-4 mr-3">Save Credentials</b-button>
+                <b-button class="is-warning is-fullwidth mt-4">Please Read</b-button>
               </div>
             </div>
-            <div class="column">
-              <h3 class="has-text-white">Launch on Windows Start up</h3>
-              <b-checkbox></b-checkbox>
-            </div>
-          </div>
-
-          <h3 class="has-text-white">BobCat Credentials</h3>
-          <h3 class="has-text-white">Creator</h3>
-          <p>Author: Michael Pereira</p>
-          <p>
-            Found a bug?
-            <a
-              href="https://github.com/Mwpereira/hnt-widget/issues/"
-              rel="noopener"
-              target="_blank"
-              auto-id="href-github-issues"
-              >Post here</a
-            >
-          </p>
-          <div class="level is-mobile">
-            <div class="level-item">
-              <b-button class="is-dark is-fullwidth" type="submit">
-                <b-icon icon="github" pack="fab" size="is-medium"> </b-icon>
-              </b-button>
-            </div>
-            <div class="level-item">
-              <b-button class="is-primary is-fullwidth">
-                <b-icon icon="linkedin" pack="fab" size="is-medium"> </b-icon>
-              </b-button>
+            <div class="column is-6">
+              <p class="has-text-white has-text-weight-semibold">Creator</p>
+              <p>Author: Michael Pereira</p>
+              <p>
+                Found a bug?
+                <a
+                    auto-id="href-github-issues"
+                    href="https://github.com/Mwpereira/hnt-widget/issues/"
+                    rel="noopener"
+                    target="_blank"
+                >Post here</a
+                >
+              </p>
+              <div class="level is-mobile">
+                <div class="level-item">
+                  <b-button class="is-dark is-fullwidth mt-3" type="submit">
+                    <b-icon icon="github" pack="fab" size="is-medium"></b-icon>
+                  </b-button>
+                </div>
+                <div class="level-item">
+                  <b-button class="is-primary is-fullwidth mt-3">
+                    <b-icon icon="linkedin" pack="fab" size="is-medium"></b-icon>
+                  </b-button>
+                </div>
+              </div>
             </div>
           </div>
         </div>
@@ -61,43 +68,32 @@ export default {
   name: "Settings",
   data() {
     return {
-      refresh: 0,
+      autoStartup: false,
+      refreshTime: 0,
     };
   },
+  watch: {
+    autoStartup(checked: boolean){
+      this.$store.commit('setAutoStartup', checked);
+    },
+    refreshTime(time: number) {
+      this.$store.dispatch('setRefreshTime', time);
+    }
+  },
   methods: {
-    pageSwitch(page) {
+    pageSwitch(page: string): void {
       this.$router.push(`/${page}`);
     },
   },
+  mounted(){
+    this.autoStartup = this.$store.getters.autoStartup;
+    this.refreshTime = this.$store.getters.refreshTime;
+  }
 };
 </script>
 
 <style>
-h1,
-p {
-  font-family: "Montserrat", sans-serif !important;
-}
-
-p {
-  font-size: 18px;
-}
-
-html,
-body {
-  background-color: #26224a;
-}
-
-#currentPrice {
-  font-size: 48px;
-  font-weight: 600;
-}
-
-.card {
-  background-color: #10173c !important;
-  color: white !important;
-}
-
-.is-primary {
-  background-color: #0093ee !important;
+html{
+  overflow: visible !important;
 }
 </style>

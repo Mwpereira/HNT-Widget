@@ -7,15 +7,14 @@
           <div class="columns is-mobile">
             <div class="column">
               <p class="has-text-white">
-                ${{ highPrice === null ? 0 : highPrice }}
+                ${{ highPrice === 0 ? 0 : highPrice }}
               </p>
               <p class="has-text-white">
                 <b-icon
-                  class="m-2"
-                  icon="caret-up"
-                  pack="fas"
-                  size="is-small"
-                  style="color: lightgreen"
+                    icon="caret-up"
+                    pack="fas"
+                    size="is-medium"
+                    style="color: lightgreen"
                 >
                 </b-icon>
                 24 Hour High
@@ -23,20 +22,19 @@
             </div>
             <div class="column">
               <p id="currentPrice" class="has-text-white">
-                ${{ currentPrice === null ? 0 : currentPrice }}
+                ${{ currentPrice === 0 ? 0 : currentPrice }}
               </p>
             </div>
             <div class="column">
               <p class="has-text-white">
-                ${{ lowPrice === null ? 0 : lowPrice }}
+                ${{ lowPrice === 0 ? 0 : lowPrice }}
               </p>
               <p class="has-text-white">
                 <b-icon
-                  class="m-2"
-                  icon="caret-down"
-                  pack="fas"
-                  size="is-small"
-                  style="color: red"
+                    icon="caret-down"
+                    pack="fas"
+                    size="is-medium"
+                    style="color: red"
                 >
                 </b-icon>
                 24 Hour Low
@@ -46,29 +44,38 @@
         </div>
       </div>
     </div>
-    <div class="level mt-5 is-mobile">
-      <b-button class="is-danger mr-1 is-fullwidth" type="submit">
-        Link Bobcat Account
-      </b-button>
-      <a href="https://ko-fi.com/michaelpereira" target="_blank">
-        <b-button class="is-warning ml-1 mr-1" icon-left="coffee">
-          Buy me a coffee
+    <div class="columns mt-5 is-mobile">
+      <div class="column is-3 is-1-mobile">
+        <b-button class="is-danger is-fullwidth" type="submit">
+          Link Bobcat Account
         </b-button>
-      </a>
-      <a
-        href="https://www.tradingview.com/symbols/HNTUSDT/?exchange=BINANCE"
-        target="_blank"
-      >
-        <b-button class="is-primary ml-1 mr-1" icon-left="chart-line">
-          Trading View
+      </div>
+      <div class="column is-3">
+        <a href="https://ko-fi.com/michaelpereira" target="_blank">
+          <b-button class="is-warning is-fullwidth" icon-left="coffee">
+            Buy me a coffee
+          </b-button>
+        </a>
+      </div>
+      <div class="column is-3">
+        <a
+            href="https://www.tradingview.com/symbols/HNTUSDT/?exchange=BINANCE"
+            target="_blank"
+        >
+          <b-button class="is-primary is-fullwidth" icon-left="chart-line">
+            Trading View
+          </b-button>
+        </a>
+      </div>
+      <div class="column is-3">
+        <b-button
+            class="is-success is-fullwidth"
+            icon-left="cog"
+            v-on:click="pageSwitch('settings')"
+        >
+          Settings
         </b-button>
-      </a>
-      <b-button
-        class="is-success ml-1"
-        icon-left="cog"
-        v-on:click="pageSwitch('/settings')"
-      >
-      </b-button>
+      </div>
     </div>
   </div>
 </template>
@@ -76,63 +83,56 @@
 <script lang="ts">
 export default {
   name: "Dashboard",
+  data() {
+    return {
+      getDataInterval: ''
+    };
+  },
   computed: {
-    currentPrice() {
+    currentPrice(): number {
       return this.$store.getters.currentPrice;
     },
-    highPrice() {
+    highPrice(): number {
       return this.$store.getters.highPrice;
     },
-    lowPrice() {
+    lowPrice(): number {
       return this.$store.getters.lowPrice;
     },
   },
   methods: {
-    pageSwitch(page) {
+    getData(){
+      this.$store.dispatch("getCurrentPrice");
+      this.$store.dispatch("getRefreshTime");
+      // setTimeOut does not work as expected on MacOS
+      // TODO: SWITCH TO WS OVER 'LONG POLLING'
+      this.getDataInterval = setInterval(() => {
+        console.log("Test")
+        this.$store.dispatch("getCurrentPrice");
+      }, this.$store.getters.refreshTime);
+    },
+    pageSwitch(page: string): void {
       this.$router.push(`/${page}`);
     },
+    openLink(url: string) {
+      window.open(url);
+    }
   },
-  mounted() {
-    this.$store.dispatch("getCurrentPrice");
-    setTimeout(() => {
-      this.$store.dispatch("getCurrentPrice");
-    }, 30000);
+  beforeDestroy () {
+    clearInterval(this.getDataInterval);
+  },
+  created () {
+    this.getData();
   },
 };
 </script>
 
-<style scoped>
+<style>
 html {
   overflow: hidden !important;
-}
-
-h1,
-p {
-  font-family: "Montserrat", sans-serif !important;
-}
-
-p {
-  font-size: 18px;
-}
-
-html,
-body {
-  background-color: #26224a;
 }
 
 #currentPrice {
   font-size: 48px;
   font-weight: 600;
-}
-
-.card {
-  background-color: #10173c !important;
-  color: white !important;
-  -webkit-user-select: none;
-  -webkit-app-region: drag;
-}
-
-.is-primary {
-  background-color: #0093ee !important;
 }
 </style>

@@ -1,5 +1,6 @@
 <template>
   <div id="app">
+    <div style="z-index: 100; position: absolute; width: 100%; height: 45px;" id="dragBar"></div>
     <router-view />
   </div>
 </template>
@@ -11,19 +12,36 @@
   -moz-osx-font-smoothing: grayscale;
   text-align: center;
   color: #2c3e50;
-  height: 100%;
+  height: 100vh !important;
+  min-height: 100% !important;
 }
 
-#nav {
-  padding: 30px;
+#dragBar{
+  -webkit-user-select: none;
+  -webkit-app-region: drag;
+}
 
-  a {
-    font-weight: bold;
-    color: #2c3e50;
+h1,
+p {
+  font-family: "Montserrat", sans-serif !important;
+}
 
-    &.router-link-exact-active {
-      color: #42b983;
-    }
-  }
+p {
+  font-size: 18px;
+}
+
+html,
+body,
+div .section {
+  background-color: #26224a;
+}
+
+.card {
+  background-color: #10173c !important;
+  color: white !important;
+}
+
+.is-primary {
+  background-color: #0093ee !important;
 }
 </style>

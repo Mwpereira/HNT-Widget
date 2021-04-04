@@ -14,12 +14,12 @@ async function createWindow() {
   // Create the browser window.
   const win = new BrowserWindow({
     title: "HNT Widget",
-    height: 335,
-    width: 675,
-    // maxHeight: 335,
-    // maxWidth: 675,
-    // minHeight: 335,
-    // minWidth: 675,
+    height: 355,
+    width: 800,
+    maxHeight: 355,
+    maxWidth: 800,
+    minHeight: 355,
+    minWidth: 800,
     frame: false,
     fullscreen: false,
     webPreferences: {
@@ -37,7 +37,7 @@ async function createWindow() {
   } else {
     createProtocol("app");
     // Load the index.html when not in development
-    win.loadURL("app://./index.html");
+    win.loadURL("app://./index.html/");
   }
 }
 

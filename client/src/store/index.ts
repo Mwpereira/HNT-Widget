@@ -9,19 +9,27 @@ let response: AxiosResponse;
 
 export default new Vuex.Store({
   state: {
-    currentPrice: null,
-    highPrice: null,
-    lowPrice: null,
+    autoStartup: false,
+    currentPrice: 0,
+    highPrice: 0,
+    lowPrice: 0,
+    refreshTime: 60000,
   },
   mutations: {
-    setCurrentPrice(state, price) {
+    setAutoStartup(state, startup: boolean){
+      state.autoStartup = startup;
+    },
+    setCurrentPrice(state, price: string) {
       state.currentPrice = parseFloat(price).toFixed(2);
     },
-    setHighPrice(state, price) {
+    setHighPrice(state, price: string) {
       state.highPrice = parseFloat(price).toFixed(2);
     },
-    setLowPrice(state, price) {
+    setLowPrice(state, price: string) {
       state.lowPrice = parseFloat(price).toFixed(2);
+    },
+    setRefresh(state, time: number) {
+      state.refreshTime = time;
     },
   },
   actions: {
@@ -31,11 +39,20 @@ export default new Vuex.Store({
       commit("setHighPrice", response.data.highPrice);
       commit("setLowPrice", response.data.lowPrice);
     },
+    getRefreshTime({ commit }){
+      commit("setRefresh",  Number(localStorage.getItem('refresh')));
+    },
+    setRefreshTime({ commit }, time: number){
+      localStorage.setItem('refresh', time.toString());
+      commit("setRefresh", time);
+    }
   },
   modules: {},
   getters: {
+    autoStartup: (state) => state.autoStartup,
     currentPrice: (state) => state.currentPrice,
     highPrice: (state) => state.highPrice,
     lowPrice: (state) => state.lowPrice,
+    refreshTime: (state) => state.refreshTime,
   },
 });
