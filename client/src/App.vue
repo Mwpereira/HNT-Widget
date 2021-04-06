@@ -36,12 +36,14 @@ div .section {
   background-color: #26224a;
 }
 
+.light-blue {
+  background-color: #0093ee !important;
+  border-color: #0093ee !important;
+  color: white;
+}
+
 .card {
   background-color: #10173c !important;
   color: white !important;
-}
-
-.is-primary {
-  background-color: #0093ee !important;
 }
 </style>

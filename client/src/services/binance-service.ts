@@ -1,4 +1,4 @@
-import axios, { AxiosResponse } from "axios";
+import axios, { AxiosResponse } from 'axios';
 
 export default class BinanceService {
   public static async getHntData(): Promise<AxiosResponse> {

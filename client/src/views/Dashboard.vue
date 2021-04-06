@@ -1,5 +1,38 @@
 <template>
   <div class="section dashboard">
+    <!--    <div class="">-->
+    <!--      <p class="" style="position: absolute; top: 0; right: 0; width: 20px; height: 25px">-->
+    <!--        <b-icon-->
+    <!--            icon="caret-up"-->
+    <!--            pack="fas"-->
+    <!--            size="is-small"-->
+    <!--            style="color: white"-->
+    <!--        >-->
+    <!--        </b-icon>-->
+    <!--      </p>-->
+    <!--    </div>-->
+    <!--    <div class="">-->
+    <!--      <p class="is-primary" style="position: absolute; top: 0; right: 20px; width: 20px; height: 25px">-->
+    <!--        <b-icon-->
+    <!--            icon="caret-up"-->
+    <!--            pack="fas"-->
+    <!--            size="is-small"-->
+    <!--            style="color: white"-->
+    <!--        >-->
+    <!--        </b-icon>-->
+    <!--      </p>-->
+    <!--    </div>-->
+    <!--    <div class="">-->
+    <!--      <p class="is-primary" style="position: absolute; top: 0; right: 40px; width: 20px; height: 25px">-->
+    <!--        <b-icon-->
+    <!--            icon="caret-up"-->
+    <!--            pack="fas"-->
+    <!--            size="is-small"-->
+    <!--            style="color: white"-->
+    <!--        >-->
+    <!--        </b-icon>-->
+    <!--      </p>-->
+    <!--    </div>-->
     <div class="card">
       <div class="card-content">
         <div class="content">
@@ -62,7 +95,7 @@
             href="https://www.tradingview.com/symbols/HNTUSDT/?exchange=BINANCE"
             target="_blank"
         >
-          <b-button class="is-primary is-fullwidth" icon-left="chart-line">
+          <b-button class="light-blue has-text-white is-fullwidth" icon-left="chart-line">
             Trading View
           </b-button>
         </a>
@@ -77,15 +110,27 @@
         </b-button>
       </div>
     </div>
+    <div class="level mt-5">
+      <div class="level-left">
+        <p class="has-text-white has-text-left">
+          All Crypto Data Provided by <a href="https://www.binance.com/en" target="_blank">Binance</a>
+        </p>
+      </div>
+      <div class="level-right">
+        <p class="has-text-white has-text-left">
+          Last Updated: {{ lastUpdated }}
+        </p>
+      </div>
+    </div>
   </div>
 </template>
 
 <script lang="ts">
 export default {
-  name: "Dashboard",
+  name: 'Dashboard',
   data() {
     return {
-      getDataInterval: ''
+      getDataInterval: '',
     };
   },
   computed: {
@@ -95,19 +140,22 @@ export default {
     highPrice(): number {
       return this.$store.getters.highPrice;
     },
+    lastUpdated(): string {
+      return this.$store.getters.lastUpdated;
+    },
     lowPrice(): number {
       return this.$store.getters.lowPrice;
     },
   },
   methods: {
-    getData(){
-      this.$store.dispatch("getCurrentPrice");
-      this.$store.dispatch("getRefreshTime");
+    getData() {
+      this.$store.dispatch('getCurrentPrice');
+      this.$store.dispatch('getRefreshTime');
       // setTimeOut does not work as expected on MacOS
       // TODO: SWITCH TO WS OVER 'LONG POLLING'
       this.getDataInterval = setInterval(() => {
-        console.log("Test")
-        this.$store.dispatch("getCurrentPrice");
+        console.log('Test');
+        this.$store.dispatch('getCurrentPrice');
       }, this.$store.getters.refreshTime);
     },
     pageSwitch(page: string): void {
@@ -115,12 +163,12 @@ export default {
     },
     openLink(url: string) {
       window.open(url);
-    }
+    },
   },
-  beforeDestroy () {
+  beforeDestroy() {
     clearInterval(this.getDataInterval);
   },
-  created () {
+  created() {
     this.getData();
   },
 };
