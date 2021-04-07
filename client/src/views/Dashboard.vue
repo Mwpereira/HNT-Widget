@@ -3,10 +3,10 @@
     <div class="card">
       <div class="card-content">
         <div class="content">
-          <h1 class="sub-title has-text-white has-text-centered" auto-id="hnt-header">HNT/USDT</h1>
+          <h1 class="sub-title has-text-white has-text-centered">HNT/USDT</h1>
           <div class="columns is-mobile">
             <div class="column">
-              <p class="has-text-white" auto-id="hnt-price">
+              <p class="has-text-white">
                 ${{ highPrice === 0 ? 0 : highPrice }}
               </p>
               <p class="has-text-white">
@@ -21,12 +21,12 @@
               </p>
             </div>
             <div class="column">
-              <p id="currentPrice" class="has-text-white" auto-id="hnt-high">
+              <p id="currentPrice" class="has-text-white">
                 ${{ currentPrice === 0 ? 0 : currentPrice }}
               </p>
             </div>
             <div class="column">
-              <p class="has-text-white" auto-id="hnt-low">
+              <p class="has-text-white">
                 ${{ lowPrice === 0 ? 0 : lowPrice }}
               </p>
               <p class="has-text-white">
@@ -46,13 +46,13 @@
     </div>
     <div class="columns mt-5 is-mobile">
       <div class="column is-3 is-1-mobile">
-        <b-button class="is-danger is-fullwidth" type="submit" auto-id="hnt-bobcat">
+        <b-button class="is-danger is-fullwidth" type="submit">
           Link Bobcat Account
         </b-button>
       </div>
       <div class="column is-3">
         <a href="https://ko-fi.com/michaelpereira" target="_blank">
-          <b-button class="is-warning is-fullwidth" icon-left="coffee" auto-id="hnt-coffee">
+          <b-button class="is-warning is-fullwidth" icon-left="coffee">
             Buy me a coffee
           </b-button>
         </a>
@@ -62,17 +62,17 @@
             href="https://www.tradingview.com/symbols/HNTUSDT/?exchange=BINANCE"
             target="_blank"
         >
-          <b-button class="light-blue has-text-white is-fullwidth" icon-left="chart-line" auto-id="hnt-trading-view">
+          <b-button class="light-blue has-text-white is-fullwidth" icon-left="chart-line">
             Trading View
           </b-button>
         </a>
       </div>
       <div class="column is-3">
         <b-button
+            auto-id="hnt-settings"
             class="is-success is-fullwidth"
             icon-left="cog"
             v-on:click="pageSwitch('settings')"
-            auto-id="hnt-settings"
         >
           Settings
         </b-button>
@@ -80,12 +80,12 @@
     </div>
     <div class="level mt-5">
       <div class="level-left">
-        <p class="has-text-white has-text-left" auto-id="binance-footer">
+        <p class="has-text-white has-text-left">
           All Crypto Data Provided by <a href="https://www.binance.com/en" target="_blank">Binance</a>
         </p>
       </div>
       <div class="level-right">
-        <p class="has-text-white has-text-left" auto-id="last-updated">
+        <p class="has-text-white has-text-left">
           Last Updated: {{ lastUpdated }}
         </p>
       </div>

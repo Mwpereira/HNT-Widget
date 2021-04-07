@@ -3,7 +3,6 @@
     <div class="card">
       <div class="card-content">
         <div class="content">
-
           <h1 class="sub-title has-text-white has-text-centered mb-5">Settings
             <b-button class="is-dark" style="display: inline; z-index: 100; position: absolute; right: 15px; top: 15px;"
                       type="submit"
