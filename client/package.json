@@ -1,7 +1,6 @@
 {
   "name": "hnt-widget",
   "version": "1.0.0",
-  "private": true,
   "description": "HNT Widget using Vue + Bulma + TypeScript + Electron",
   "author": "Michael W. Pereira",
   "scripts": {
