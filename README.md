@@ -37,14 +37,6 @@ This software uses the Binance API, information here for the [Binance Docs](http
 -   _Buefy_ - for using UI components for Vue.js based on Bulma
 -   _axios_ - for the promise based HTTP client to handle requests
 
-## 🧪 Testing
-
-### Run Cypress e2e tests
-
-```
-npm run test:e2e
-```
-
 ### Gallery
 
 <img src="/dist/screenshots/v1/dashboard.PNG" width="750x50">
