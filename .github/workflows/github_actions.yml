@@ -1,0 +1,32 @@
+name: Github Actions
+
+on:
+  pull_request:
+    branches:
+      - main
+      - develop
+  push:
+    branches:
+      - master
+      - develop
+
+jobs:
+  e2e-tests:
+    name: Running E2E Tests
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v1
+      - name: Use Node.js ${{ matrix.node-version }}
+        uses: actions/setup-node@v1
+        with:
+          node-version: ${{ matrix.node-version }}
+      - name: Installing Client Dependencies
+        run: cd client && npm install
+      - name: Starting & E2E Tests
+        run: cd client && npm run ci:e2e
+      - uses: actions/upload-artifact@v2
+        if: always()
+        with:
+          name: Cypress-video ${{ matrix.affected-projects }}
+          path: client/tests/e2e/videos/**/*
+          retention-days: 10

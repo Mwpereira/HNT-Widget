@@ -20,7 +20,7 @@ Develop using a Desktop Application
 npm run electron:serve
 ```
 
-## Binance API
+## 🕸 Binance API
 
 This software uses the Binance API, information here for the [Binance Docs](https://binance-docs.github.io/apidocs/spot/en/#change-log)
 

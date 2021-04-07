@@ -15,7 +15,7 @@ export default new Vuex.Store({
         autoStartup: false,
         currentPrice: 0,
         highPrice: 0,
-        lastUpdated: "",
+        lastUpdated: '',
         lowPrice: 0,
         refreshTime: 60000,
     },
