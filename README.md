@@ -47,5 +47,5 @@ npm run test:e2e
 
 ### Gallery
 
-<img src="/dist/screenshots/dashboard.PNG" width="750x50">
-<img src="/dist/screenshots/settings.PNG" width="750x50">
+<img src="/dist/screenshots/v1/dashboard.PNG" width="750x50">
+<img src="/dist/screenshots/v1/settings.PNG" width="750x50">
