@@ -39,7 +39,7 @@ div .section {
 .light-blue {
   background-color: #0093ee !important;
   border-color: #0093ee !important;
-  color: white;
+  color: white !important;
 }
 
 .card {

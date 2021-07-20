@@ -2,8 +2,8 @@ import Vue from 'vue';
 import Vuex from 'vuex';
 import {AxiosResponse} from 'axios';
 import BinanceService from '../services/binance-service';
-const tinyTime = require('tinytime');
 
+const tinyTime = require('tinytime');
 const template = tinyTime('{h}:{mm}:{ss}{a}');
 
 Vue.use(Vuex);
@@ -42,6 +42,7 @@ export default new Vuex.Store({
     actions: {
         async getCurrentPrice({commit}) {
             response = await BinanceService.getHntData();
+
             commit('setCurrentPrice', response.data.lastPrice);
             commit('setHighPrice', response.data.highPrice);
             commit('setLowPrice', response.data.lowPrice);

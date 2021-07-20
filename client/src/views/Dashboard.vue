@@ -45,19 +45,21 @@
       </div>
     </div>
     <div class="columns mt-5 is-mobile">
-      <div class="column is-3 is-1-mobile">
-        <b-button class="is-danger is-fullwidth" type="submit">
-          Link Bobcat Account
+      <div class="column is-1-mobile">
+        <a href="https://helium.com/" target="_blank">
+        <b-button class="is-danger mr-1" type="submit" icon-left="globe">
+          Helium Network
         </b-button>
+        </a>
       </div>
-      <div class="column is-3">
+      <div class="column">
         <a href="https://ko-fi.com/michaelpereira" target="_blank">
           <b-button class="is-warning is-fullwidth" icon-left="coffee">
             Buy me a coffee
           </b-button>
         </a>
       </div>
-      <div class="column is-3">
+      <div class="column">
         <a
             href="https://www.tradingview.com/symbols/HNTUSDT/?exchange=BINANCE"
             target="_blank"
@@ -67,7 +69,7 @@
           </b-button>
         </a>
       </div>
-      <div class="column is-3">
+      <div class="column">
         <b-button
             auto-id="hnt-settings"
             class="is-success is-fullwidth"
