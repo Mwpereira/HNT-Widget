@@ -124,15 +124,11 @@ export default {
       // setTimeOut does not work as expected on MacOS
       // TODO: SWITCH TO WS OVER 'LONG POLLING'
       this.getDataInterval = setInterval(() => {
-        console.log('Test');
         this.$store.dispatch('getCurrentPrice');
       }, this.$store.getters.refreshTime);
     },
     pageSwitch(page: string): void {
       this.$router.push(`/${page}`);
-    },
-    openLink(url: string) {
-      window.open(url);
     },
   },
   beforeDestroy() {
